@@ -17,31 +17,22 @@
             <div class="iq-card">
                 <div class="iq-card-header d-flex justify-content-between">
                    <div class="iq-header-title">
-                      <h4 class="card-title">User Detail</h4>
+                      <h4 class="card-title">Process Refund</h4>
                    </div>
                 </div>
                 <div class="iq-card-body px-4">
                    
                     <div class="row">
                         <div class="col-md-6 col-sm-12 mb-3">
-                            <label for="first_name">First Name </label>
-                            <input type="text" class="form-control" name="first_name" disabled value="{{$user->first_name}}">
+                            <label for="first_name">Name</label>
+                            <input type="text" class="form-control" name="name" disabled value="{{$customer->name}}">
                         </div>
                         <div class="col-md-6 col-sm-12 mb-3">
-                            <label for="last_name">Last Name</label>
-                            <input type="text" class="form-control" name="last_name" disabled value="{{$user->last_name}}">
+                            <label for="last_name">Account</label>
+                            <input type="text" class="form-control" name="account" disabled value="{{$customer->account}}">
                         </div>
                      </div>
-                     <div class="row">
-                        <div class="col-md-6 col-sm-12 mb-3">
-                            <label for="username">Username:</label>
-                            <input type="text" class="form-control" id="username" name="username" disabled value="{{$user->username}}">
-                        </div>
-                        <div class="col-md-6 col-sm-12 mb-3">
-                            <label for="email">Email address:</label>
-                            <input type="email" class="form-control" id="email" name="email" disabled value="{{$user->email}}">
-                        </div>
-                     </div>
+                  
                 
                       <div class="mt-5">
                         <div class="row">

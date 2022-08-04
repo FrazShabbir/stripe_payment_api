@@ -27,10 +27,11 @@
                                     aria-describedby="user-list-page-info">
                                     <thead>
                                         <tr>
-                                            <th>#</th>
+                                            <th>Transaction ID</th>
                                             <th>Name</th>
-                                            <th>Email</th>
-                                            <th>Role</th>
+                                            <th>Account</th>
+                                            <th>Amount</th>
+                                            <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -38,31 +39,23 @@
                                         @php
                                             $i = 1;
                                         @endphp
-                                        @foreach ($users as $user)
+                                        @foreach ($customers as $customer)
                                             <tr>
-                                                <td>{{ $i }}</td>
-                                                <td>{{ getFullNameById($user->id) }}</td>
-                                                <td>{{ $user->email }}</td>
+                                                <td>{{ $customer->transaction_id }}</td>
+                                                <td>{{ $customer->name }}</td>
+                                                <td>{{ $customer->account }}</td>
+                                                <td>{{ $customer->amount }}</td>
+                                                <td>{{ ucfirst($customer->status) }}</td>
+                                               
                                                 <td>
-                                                    @foreach ($user->getRoleNames() as $role)
-                                                        <span class="badge badge-primary">{{ $role }}</span>
-                                                    @endforeach
-                                                </td>
-                                                <td>
-                                                    <form action="{{ route('users.destroy', $user->id) }}" method="post">
+                                                   
                                                         <div class="flex align-items-center list-user-action">
                                                             <a class="iq-bg-primary" data-toggle="tooltip"
                                                                 data-placement="top" title=""
-                                                                data-original-title="Show" href="{{route('users.show', $user->id)}}"><i
-                                                                    class="lar la-eye"></i></a>
-                                                            <a class="iq-bg-primary" data-toggle="tooltip"
-                                                                data-placement="top" title=""
-                                                                data-original-title="Edit"
-                                                                href="{{ route('users.edit', $user->id) }}"><i
-                                                                    class="ri-pencil-line"></i></a>
-                                                            @if (Auth::user()->id != $user->id)
-                                                                @csrf
-                                                                {{ method_field('Delete') }}
+                                                                data-original-title="Show" href="{{route('customers.refund', $customer->transaction_id)}}">Refund</a>
+                                                   
+                                                           
+                                                              
                                                                 <button
                                                                     onclick="return confirm('Are you sure you want to delete?')"
                                                                     type="submit" class="iq-bg-primary border-0 rounded"
@@ -70,7 +63,7 @@
                                                                     title="" data-original-title="Delete">
                                                                     <i class="las la-trash"></i>
                                                                 </button>
-                                                            @endif
+                                                           
 
                                                         </div>
                                                     </form>

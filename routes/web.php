@@ -4,8 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\RoleController;
 use App\Http\Controllers\Backend\GeneralController;
-use App\Http\Controllers\Backend\DesignationController;
-use App\Http\Controllers\Stripe\MoneySetupController;
 use App\Http\Controllers\StripePaymentController;
 
 /*
@@ -34,6 +32,8 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard'],function () {
 
     Route::get('stripe', [StripePaymentController::class, 'stripe'])->name('stripe');
     Route::post('stripe', [StripePaymentController::class, 'stripePost'])->name('stripe.post');
+    Route::get('customers', [StripePaymentController::class, 'customers'])->name('customers.index');
+    Route::get('customers/{id}/refund', [StripePaymentController::class, 'refund'])->name('customers.refund');
 
 
 
@@ -61,14 +61,6 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard'],function () {
 
 
 
-    //Route::resource('designations', DesignationController::class);
-    Route::get('designations', [DesignationController::class, 'index'])->name('designations.index')->middleware(['can:Read Designations']);
-    Route::get('designation/create', [DesignationController::class, 'create'])->name('designations.create')->middleware(['can:Create Designations']);
-    Route::post('designation/create/save', [DesignationController::class, 'store'])->name('designations.store')->middleware(['can:Create Designations']);
-    Route::get('designation/{id}', [DesignationController::class, 'show'])->name('designations.show')->middleware(['can:Read Designations']);
-    Route::get('designation/{id}/edit', [DesignationController::class, 'edit'])->name('designations.edit')->middleware(['can:Update Designations']);
-    Route::put('designation/{id}/update', [DesignationController::class, 'update'])->name('designations.update')->middleware(['can:Update Designations']);
-    Route::delete('designation/{id}', [DesignationController::class, 'destroy'])->name('designations.destroy')->middleware(['can:Delete Designations']);
 
     
     Route::get('reset-password/{user}', [UserController::class, 'reset_password'])->name('users.reset_password');
@@ -77,17 +69,4 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard'],function () {
     Route::post('/site-settings-save', [GeneralController::class, 'save_general_settings'])->name('site_settings_save');    
 });
 require __DIR__.'/auth.php';
-
-
-
-
-    // Route::get('addmoney/stripe', array('as' => 'addmoney.paystripe','uses' => 'MoneySetupController@PaymentStripe'));
-    // Route::post('addmoney/stripe', array('as' => 'addmoney.stripe','uses' => 'MoneySetupController@postPaymentStripe'));
-   // Route::get('addmoney/stripe', [MoneySetupController::class, 'PaymentStripe'])->name('addmoney.paystripe');
-   // Route::post('addmoney/stripe', [MoneySetupController::class, 'postPaymentStripe'])->name('addmoney.stripe');
-    
-    //Route::post('products/purchase', [MoneySetupController::class, 'purchase'])->name('products.purchase');
-
-    // Route::post('products/{id}/purchase', 'MoneySetupController@purchase')->name('products.purchase');
-
 

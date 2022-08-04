@@ -48,7 +48,7 @@
                                 <div class="row">
                                     <div class="col-md-12 col-sm-12 mb-3 required">
                                         <label for="name" class="required">Name on Card</label>
-                                        <input type="text" class="form-control" name="" placeholder="e.g. John"
+                                        <input type="text" class="form-control" name="name" placeholder="e.g. John"
                                             size='4' value="Fraz">
                                     </div>
 
