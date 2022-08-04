@@ -1,5 +1,5 @@
 @extends('backend.main')
-@section('title', 'Make A payment')
+@section('title', 'Create User - FDD')
 
 @section('styles')
 @endsection
@@ -30,7 +30,7 @@
                                     <div class="col-md-12 col-sm-12 mb-3 required">
                                         <label for="acc_no" class="required">Account Number</label>
                                         <input type="text" class="form-control" name="acc_no" placeholder="9009998790"
-                                            size='4' value="787878">
+                                            size='4'>
                                     </div>
 
 
@@ -39,7 +39,7 @@
                                     <div class="col-md-12 col-sm-12 mb-3 required">
                                         <label for="acc_no" class="required">Amount</label>
                                         <input type="text" class="form-control" name="amount" placeholder="34"
-                                            size='4' value="17">
+                                            size='4'>
                                     </div>
 
 
@@ -49,7 +49,7 @@
                                     <div class="col-md-12 col-sm-12 mb-3 required">
                                         <label for="name" class="required">Name on Card</label>
                                         <input type="text" class="form-control" name="" placeholder="e.g. John"
-                                            size='4' value="Fraz">
+                                            size='4'>
                                     </div>
 
 
@@ -58,7 +58,7 @@
                                     <div class="col-md-12 col-sm-12 mb-3 card required">
                                         <label for="name" class="">Card Number</label>
                                         <input size='20' type='text' class="form-control card-number" name=""
-                                            placeholder="42424242" size='4' value="4242424242424242">
+                                            placeholder="42424242" size='4'>
                                     </div>
 
 
@@ -68,17 +68,17 @@
                                     <div class="col-md-4 col-sm-12 mb-3 cvc required">
                                         <label for="name" class="">CVC</label>
                                         <input size='20' type='text' class="form-control card-cvc" name=""
-                                            placeholder="686" size='4' value="897">
+                                            placeholder="686" size='4'>
                                     </div>
                                     <div class="col-md-4 col-sm-12 mb-3 expiration required">
                                         <label for="name" class="">Expiration Month</label>
                                         <input size='20' type='text' class="form-control card-expiry-month"
-                                            name="" placeholder="MM" size='4' value="8"> 
+                                            name="" placeholder="MM" size='4'>
                                     </div>
                                     <div class="col-md-4 col-sm-12 mb-3 expiration required">
                                         <label for="name" class="">Expiration Year</label>
                                         <input size='20' type='text' class="form-control card-expiry-year"
-                                            name="" placeholder="YYYY" size='4' value="2024">
+                                            name="" placeholder="YYYY" size='4'>
                                     </div>
 
                                 </div>

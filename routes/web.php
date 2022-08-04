@@ -5,6 +5,8 @@ use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\RoleController;
 use App\Http\Controllers\Backend\GeneralController;
 use App\Http\Controllers\Backend\DesignationController;
+use App\Http\Controllers\Stripe\MoneySetupController;
+use App\Http\Controllers\StripePaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +30,13 @@ Route::get('/', function () {
 Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard'],function () {
 
     Route::get('/', [GeneralController::class, 'dashboard'])->name('dashboard');
+
+
+    Route::get('stripe', [StripePaymentController::class, 'stripe'])->name('stripe');
+    Route::post('stripe', [StripePaymentController::class, 'stripePost'])->name('stripe.post');
+
+
+
 
     // Route::resource('users', UserController::class);
     Route::get('users', [UserController::class, 'index'])->name('users.index')->middleware(['can:Read Users']);
@@ -68,3 +77,17 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard'],function () {
     Route::post('/site-settings-save', [GeneralController::class, 'save_general_settings'])->name('site_settings_save');    
 });
 require __DIR__.'/auth.php';
+
+
+
+
+    // Route::get('addmoney/stripe', array('as' => 'addmoney.paystripe','uses' => 'MoneySetupController@PaymentStripe'));
+    // Route::post('addmoney/stripe', array('as' => 'addmoney.stripe','uses' => 'MoneySetupController@postPaymentStripe'));
+   // Route::get('addmoney/stripe', [MoneySetupController::class, 'PaymentStripe'])->name('addmoney.paystripe');
+   // Route::post('addmoney/stripe', [MoneySetupController::class, 'postPaymentStripe'])->name('addmoney.stripe');
+    
+    //Route::post('products/purchase', [MoneySetupController::class, 'purchase'])->name('products.purchase');
+
+    // Route::post('products/{id}/purchase', 'MoneySetupController@purchase')->name('products.purchase');
+
+

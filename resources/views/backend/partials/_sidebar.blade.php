@@ -88,7 +88,10 @@
         @endcan
         {{-- SETTING END --}}
         
-
+        <li class="{{ request()->route()->getName() == 'site.siteSettings'? 'active': '' }}">
+            <a href="{{ route('stripe') }}" class="iq-waves-effect"><i
+                    class="las la-tools iq-arrow-left"></i><span>Payment</span></a>
+        </li>
     </ul>
 </nav>
 <div class="p-3"></div>
