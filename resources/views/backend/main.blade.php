@@ -40,6 +40,7 @@
         <!-- Page Content  -->
 
         @yield('content')
+        
     </div>
     <!-- Page Content END  -->
 

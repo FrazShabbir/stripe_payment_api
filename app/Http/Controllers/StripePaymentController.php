@@ -55,14 +55,15 @@ class StripePaymentController extends Controller
                 'charge' => $charge->amount,
                 'last4' => $charge->payment_method_details->last4,
             ];
-            //$user = '2425568096';
-            //$url = "http://topifly.com/tfapi.php?Accion=PoA&useR=".$user."&Amount=".$request->amount."&Approval=".$charge->id;
-            Session::flash('success', 'Payment successful!');
-            //return redirect($url);
+            alert()->success('Success', 'Refunded Successfully');
+
 
             return back();
         } catch (\Throwable $th) {
-            throw $th;
+            Session::flash('error', $th->getMessage());
+            alert()->error('Payment Unsuccessful!', $th->getMessage());
+            return redirect()->back();
+            // throw $th;
         }
     }
 
@@ -72,20 +73,53 @@ class StripePaymentController extends Controller
         $customers = Customer::all();
         return view('backend.customers.index')->withCustomers($customers);
     }
-    public function refund($id)
+    public function customerShow($id)
+    {
+        $customer = Customer::findOrFail($id);
+
+        return view('backend.customers.show')
+        ->withCustomer($customer);
+    }
+
+    public function processRefund($id, $trans)
+    {
+        $customerid = $id;
+        $customer = Customer::find($id);
+        if($customer->refund_id){
+            alert()->info('Info', 'This Transaction  is Already Refunded');
+            return redirect()->back();
+        }
+        $trans = $trans;
+        return view('backend.customers.process_refund')
+        ->withCustomerid($customerid)
+        ->withTrans($trans);
+    }
+    public function refund(Request $request,$id, $trans)
     {
         $stripe =  Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
 
         try {
             $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
-            $stripe->refunds->create([
-                'charge' => $id,
+            $refund = $stripe->refunds->create([
+                'charge' => $trans,
               ]);
+            $customer = Customer::find($id);
+            $customer->status = 'Refunded';
+            $customer->refund_id = $refund->id;
+            $customer->reason = $request->reason;
+            $customer->save();
+            alert()->success('Success', 'Refunded Successfully');
+
+            return redirect()->route('customers.index');
+            //   dd($refund->status);
         } catch (\Throwable $th) {
-            throw $th;
+            alert()->error($th->getMessage(), 'Error');
+
+            return redirect()->route('customers.index');
+            //throw $th;
         }
 
 
-        return redirect()->back();
+       
     }
 }

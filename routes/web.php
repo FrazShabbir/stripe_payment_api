@@ -17,12 +17,16 @@ use App\Http\Controllers\StripePaymentController;
 |
 */
 
+// Route::get('/', function () {
+//     if (auth()->check()) {
+//         return redirect(url('/dashboard'));
+//     } else {
+//         return redirect('/login');
+//     }
+// });
+
 Route::get('/', function () {
-    if (auth()->check()) {
-        return redirect(url('/dashboard'));
-    } else {
-        return redirect('/login');
-    }
+  return view('backend.index');
 });
 
 Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard'],function () {
@@ -33,7 +37,12 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard'],function () {
     Route::get('stripe', [StripePaymentController::class, 'stripe'])->name('stripe');
     Route::post('stripe', [StripePaymentController::class, 'stripePost'])->name('stripe.post');
     Route::get('customers', [StripePaymentController::class, 'customers'])->name('customers.index');
-    Route::get('customers/{id}/refund', [StripePaymentController::class, 'refund'])->name('customers.refund');
+    Route::get('customers/{id}/refund/{trans}', [StripePaymentController::class, 'processRefund'])->name('customers.processRefund');
+    
+    Route::post('customers/{id}/refund/{trans}', [StripePaymentController::class, 'refund'])->name('customers.refund');
+    
+
+    Route::get('customers/{id}', [StripePaymentController::class, 'customerShow'])->name('customers.show');
 
 
 

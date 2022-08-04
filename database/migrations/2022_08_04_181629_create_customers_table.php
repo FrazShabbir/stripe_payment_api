@@ -18,8 +18,11 @@ return new class extends Migration
             $table->string('name');
             $table->string('transaction_id')->unique();
             $table->string('amount');
-            $table->string('account');     
-            $table->string('status')->default('200');     
+            $table->string('account');
+            $table->string('refund_id')->nullable()->unique(); 
+            $table->string('reason')->nullable();
+            $table->string('status')->default('200');   
+
             $table->timestamps();
         });
     }

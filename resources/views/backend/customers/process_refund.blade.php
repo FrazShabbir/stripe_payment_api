@@ -1,5 +1,5 @@
 @extends('backend.main')
-@section('title', 'User - FDD')
+@section('title', 'Process Refund')
 
 @section('styles')
 @endsection
@@ -21,62 +21,20 @@
                    </div>
                 </div>
                 <div class="iq-card-body px-4">
-                   
+                   <form action="{{route('customers.refund',[$customerid,$trans])}}" method="POST">
+                    @csrf
+                    {{@method_field('POST')}}
                     <div class="row">
                         <div class="col-md-6 col-sm-12 mb-3">
-                            <label for="first_name">Name</label>
-                            <input type="text" class="form-control" name="name" disabled value="{{$customer->name}}">
+                            <label for="reason" class="required">Reason</label>
+                            <input type="text" class="form-control" name="reason" placeholder="State Your Reason">
                         </div>
-                        <div class="col-md-6 col-sm-12 mb-3">
-                            <label for="last_name">Account</label>
-                            <input type="text" class="form-control" name="account" disabled value="{{$customer->account}}">
-                        </div>
+                       
                      </div>
-                  
-                
-                      <div class="mt-5">
-                        <div class="row">
-                            <div class="col-lg-2 col-md-2 col-sm-12">
-                                <div class="mt-2 mb-3">
-                                    <h4>
-                                        Access Level:
-                                    </h4>
-                                </div>
-                            </div>
-                            <div class="col-gl-10 col-md-10 col-sm-12">
-                                <div class="row">
-                                    @foreach ($user->getRoleNames() as $role)
-                                    <div class="col-md-3 col-sm-12">
-                                        <div class="custom-control custom-checkbox mb-3">
-                                            <input type="checkbox" disabled checked  class="custom-control-input" id="{{$role}}" value="{{$role}}">
-                                            <label class="custom-control-label" for="{{$role}}"> {{ucfirst($role)}}</label>
-                                         </div>
-                                    </div>
-                                    @endforeach
-                                </div>
-                            </div>
-                        </div>
-                      </div>
-                      <div class="mt-5 mb-4">
-                        <div class="row">
-                            <div class="col-lg-2 col-md-2 col-sm-12">
-                                <div class="mt-2 mb-3">
-                                    <h4>
-                                        User Status
-                                    </h4>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-sm-12">
-                                <div class="form-group">
-                                    <input type="text" class="form-control"  disabled value="{{getUserStatus($user->id)}}">
-                                 </div>
-                            </div>
-                        </div>
-                      </div>
-                      <a href="{{route('users.edit',$user->id)}}" class="btn btn-primary mr-3">Edit User</a>
-                      <a href="{{route('users.index')}}" class="btn iq-bg-danger mr-3">Back</a>
-                      <a href="{{route('users.reset_password',$user->id)}}" class="btn iq-bg-info">Reset Password</a>
-
+                   
+                      <button type="submit" class="btn btn-primary mr-3">Update Data</button>
+                      <a href="{{route('users.index')}}" class="btn iq-bg-danger mr-3">Cancel</a>
+                   </form>
                 </div>
              </div>
           </div>

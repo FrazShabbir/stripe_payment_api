@@ -17,7 +17,7 @@
                     <div class="iq-card">
                         <div class="iq-card-header d-flex justify-content-between">
                             <div class="iq-header-title">
-                                <h4 class="card-title">User List</h4>
+                                <h4 class="card-title">Customers</h4>
                             </div>
                         </div>
                         <div class="iq-card-body">
@@ -45,26 +45,15 @@
                                                 <td>{{ $customer->name }}</td>
                                                 <td>{{ $customer->account }}</td>
                                                 <td>{{ $customer->amount }}</td>
-                                                <td>{{ ucfirst($customer->status) }}</td>
+                                                <td><span class="ml-2 badge {{$customer->status=='Refunded'?'badge-danger':'badge-success'}}" >{{ ucfirst($customer->status) }}</span></td>
                                                
                                                 <td>
                                                    
                                                         <div class="flex align-items-center list-user-action">
                                                             <a class="iq-bg-primary" data-toggle="tooltip"
                                                                 data-placement="top" title=""
-                                                                data-original-title="Show" href="{{route('customers.refund', $customer->transaction_id)}}">Refund</a>
-                                                   
-                                                           
-                                                              
-                                                                <button
-                                                                    onclick="return confirm('Are you sure you want to delete?')"
-                                                                    type="submit" class="iq-bg-primary border-0 rounded"
-                                                                    data-toggle="tooltip" data-placement="top"
-                                                                    title="" data-original-title="Delete">
-                                                                    <i class="las la-trash"></i>
-                                                                </button>
-                                                           
-
+                                                                data-original-title="Show" href="{{route('customers.show', $customer->id)}}"> <i class="las la-eye"></i></a>
+                                            
                                                         </div>
                                                     </form>
                                                 </td>
