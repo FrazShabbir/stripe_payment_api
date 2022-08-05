@@ -45,7 +45,7 @@
                                                 <td>{{ $customer->name }}</td>
                                                 <td>{{ $customer->account }}</td>
                                                 <td>{{ $customer->amount }}</td>
-                                                <td><span class="ml-2 badge {{$customer->status=='Refunded'?'badge-danger':'badge-success'}}" >{{ ucfirst($customer->status) }}</span></td>
+                                                <td><span class="ml-2 badge @if($customer->status=='Refunded')badge-danger @elseif($customer->status=='succeeded') badge-success @elseif($customer->status=='Manual-Refunded') badge-info @endif" >{{ ucfirst($customer->status) }}</span></td>
                                                
                                                 <td>
                                                    

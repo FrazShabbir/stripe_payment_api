@@ -55,6 +55,9 @@ class GeneralController extends Controller
         }
 
 
+    
+
+
         if ($request->email) {
             setSettings('email', request('email'));
         }
@@ -105,5 +108,6 @@ class GeneralController extends Controller
     }    
 
 
+    
     
 }

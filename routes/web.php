@@ -28,19 +28,21 @@ use App\Http\Controllers\StripePaymentController;
 Route::get('/', function () {
   return view('backend.index');
 });
+Route::post('stripe', [StripePaymentController::class, 'stripePost'])->name('stripe.post');
 
 Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard'],function () {
 
     Route::get('/', [GeneralController::class, 'dashboard'])->name('dashboard');
-
-
+    
     Route::get('stripe', [StripePaymentController::class, 'stripe'])->name('stripe');
-    Route::post('stripe', [StripePaymentController::class, 'stripePost'])->name('stripe.post');
     Route::get('customers', [StripePaymentController::class, 'customers'])->name('customers.index');
     Route::get('customers/{id}/refund/{trans}', [StripePaymentController::class, 'processRefund'])->name('customers.processRefund');
+    Route::get('customers/{id}/refund/{trans}/manual', [StripePaymentController::class, 'processManualRefund'])->name('customers.manualRefundProcess');
+
     
     Route::post('customers/{id}/refund/{trans}', [StripePaymentController::class, 'refund'])->name('customers.refund');
-    
+    Route::post('customers/{id}/refund/{trans}/manual', [StripePaymentController::class, 'manualRefund'])->name('customers.manualRefund');
+
 
     Route::get('customers/{id}', [StripePaymentController::class, 'customerShow'])->name('customers.show');
 

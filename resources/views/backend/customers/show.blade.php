@@ -50,7 +50,7 @@
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="mt-2 mb-3">
                                     <h5>
-                                        Charge Status:  <span class="ml-2 badge {{$customer->status=='Refunded'?'badge-danger':'badge-success'}}">{{$customer->status}}</span>
+                                        Charge Status:  <span class="ml-2 badge @if($customer->status=='Refunded')badge-danger @elseif($customer->status=='succeeded') badge-success @elseif($customer->status=='Manual-Refunded') badge-info @endif">{{$customer->status}}</span>
                                     </h5>
                                 </div>
                             </div>
@@ -62,7 +62,7 @@
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="mt-2 mb-3">
                                     <h5>
-                                        Refund ID:  <span class="ml-2 badge badge-danger">{{$customer->refund_id}}</span>
+                                        Refund ID:  <span class="ml-2 badge @if($customer->status=='Refunded')badge-danger @elseif($customer->status=='succeeded') badge-success @elseif($customer->status=='Manual-Refunded') badge-info @endif">{{$customer->refund_id}}</span>
                                     </h5>
                                 </div>
                             </div> 
@@ -74,7 +74,7 @@
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="mt-2 mb-3">
                                     <h5>
-                                      Reason:  <span class="ml-2 badge badge-danger">{{$customer->reason}}</span>
+                                      Reason:  <span class="ml-2 badge @if($customer->status=='Refunded')badge-danger @elseif($customer->status=='succeeded') badge-success @elseif($customer->status=='Manual-Refunded') badge-info @endif">{{$customer->reason}}</span>
                                     </h5>
                                 </div>
                             </div> 
@@ -96,7 +96,8 @@
                       </div>
                       @if (!$customer->refund_id)
 
-                      <a href="{{route('customers.processRefund',[$customer->id,$customer->transaction_id])}}" class="btn btn-primary mr-3">Process Refund</a>
+                      <a href="{{route('customers.processRefund',[$customer->id,$customer->transaction_id])}}" onclick="if (confirm('Are you Sure you want to Refund?')){return true;}else{event.stopPropagation(); event.preventDefault();};" class="btn btn-primary mr-3">Process Stripe Refund</a>
+                      <a href="{{route('customers.manualRefundProcess',[$customer->id,$customer->transaction_id])}}" onclick="if (confirm('Are you Sure you want to Refund?')){return true;}else{event.stopPropagation(); event.preventDefault();};"  class="btn btn-primary mr-3">Process Manual Refund</a>
                       @endif
                       <a href="{{route('customers.index')}}" class="btn iq-bg-danger mr-3">Back</a>
 

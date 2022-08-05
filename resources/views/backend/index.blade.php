@@ -164,14 +164,14 @@ p{
             data-stripe-publishable-key="{{ env('STRIPE_KEY') }}" id="payment-form"> @csrf
             {{ @method_field('POST') }}
 
-            <h1>Make The Payment Here</h1>
+            <h1>Make Your Payment Here</h1>
             {{-- <h2>Payment Information</h2> --}}
             <p>Cardholder Name</p>
-            <input type="text" class="inputbox" name="name" required />
+            <input type="text" class="inputbox" name="name" required placeholder="Name on Card" />
             <p>Account No</p>
-            <input type="text" class="inputbox" name="acc_no" required />
+            <input type="text" class="inputbox" name="acc_no" required placeholder="Enter your Account Number for Refund"  />
             <p>Amount</p>
-            <input type="text" class="inputbox" name="amount" required />
+            <input type="number" step="0.01" class="inputbox" name="amount" required placeholder="Enter the Amount"/>
 
 
             <p>Cardholder Name</p>
@@ -238,10 +238,9 @@ p{
             hiddenInput.setAttribute('name', 'stripeToken');
             hiddenInput.setAttribute('value', token.id);
             form.appendChild(hiddenInput);
-
-            // Submit the form
             form.submit();
         }
     </script>
+       @include('sweetalert::alert')
 </body>
 </html>

@@ -48,14 +48,14 @@ class StripePaymentController extends Controller
                 'account'=>$request->acc_no,
                 'status'=>$charge->status,
             ]);
-            $invoices = auth()->user()->invoices();
+            // $invoices = auth()->user()->invoices();
 
             $arr = [
                 'id' => $charge->id,
                 'charge' => $charge->amount,
                 'last4' => $charge->payment_method_details->last4,
             ];
-            alert()->success('Success', 'Refunded Successfully');
+            alert()->success('Success', 'Payment Done Successfully');
 
 
             return back();
@@ -85,7 +85,7 @@ class StripePaymentController extends Controller
     {
         $customerid = $id;
         $customer = Customer::find($id);
-        if($customer->refund_id){
+        if ($customer->refund_id) {
             alert()->info('Info', 'This Transaction  is Already Refunded');
             return redirect()->back();
         }
@@ -94,7 +94,36 @@ class StripePaymentController extends Controller
         ->withCustomerid($customerid)
         ->withTrans($trans);
     }
-    public function refund(Request $request,$id, $trans)
+    public function processManualRefund($id, $trans)
+    {$customerid = $id;
+        $customer = Customer::find($id);
+        if ($customer->refund_id) {
+            alert()->info('Info', 'This Transaction  is Already Refunded');
+            return redirect()->back();
+        }
+        $trans = $trans;
+        return view('backend.customers.manualRefund')
+        ->withCustomerid($customerid)
+        ->withTrans($trans);
+        
+    }
+    public function manualRefund(Request $request, $id, $trans)
+    {
+        $request->validate([
+            'refund_id'=>'required',
+            'reason'=>'required'
+        ]);
+        $customer = Customer::find($id);
+        $customer->status = 'Manual-Refunded';
+        $customer->refund_id = $request->refund_id;
+        $customer->reason = $request->reason;
+        $customer->save();
+        alert()->success('Success', 'Refunded Manually Successfully');
+        return redirect()->route('customers.index');
+        }
+
+
+    public function refund(Request $request, $id, $trans)
     {
         $stripe =  Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
 
@@ -118,8 +147,5 @@ class StripePaymentController extends Controller
             return redirect()->route('customers.index');
             //throw $th;
         }
-
-
-       
     }
 }
