@@ -7,6 +7,8 @@ use Session;
 use Stripe;
 use Laravel\Cashier\Cashier;
 use App\Models\Customer;
+use App\Models\User;
+use Illuminate\Support\Facades\Http;
 
 class StripePaymentController extends Controller
 {
@@ -55,11 +57,20 @@ class StripePaymentController extends Controller
                 'charge' => $charge->amount,
                 'last4' => $charge->payment_method_details->last4,
             ];
+
+
+            $response = Http::post('http://topifly.com/tfapi.php', [
+                'Accion'=>'PoA',
+                'useR' => $request->acc_no,
+                'Amount' => $request->amount,
+                'Approval'=>$charge->status
+            ]);
+
+            // dd($response);
             alert()->success('Success', 'Payment Done Successfully');
-
-
             return back();
         } catch (\Throwable $th) {
+
             Session::flash('error', $th->getMessage());
             alert()->error('Payment Unsuccessful!', $th->getMessage());
             return redirect()->back();
@@ -86,7 +97,7 @@ class StripePaymentController extends Controller
         $customerid = $id;
         $customer = Customer::find($id);
         if ($customer->refund_id) {
-            alert()->info('Info', 'This Transaction  is Already Refunded');
+            alert()->info('Info', 'This Transaction is Already Refunded');
             return redirect()->back();
         }
         $trans = $trans;
@@ -147,5 +158,26 @@ class StripePaymentController extends Controller
             return redirect()->route('customers.index');
             //throw $th;
         }
+    }
+
+
+    public function testApi(Request $request){
+        
+      
+       $response = Http::put('http://topifly.com/tfapi.php', [
+                'Accion'=>'PoA',
+                'useR' =>'2425568096',
+                'Amount' => '30',
+                'Approval'=>'43'
+            ]);
+
+        if ($response){
+            return response()->json(['Resut'=>$response->getStatusCode()]);
+        }
+        else{
+            return response()->json(['Resut'=>'Your post Request  is NOT saved Successfully']);
+
+        }
+    
     }
 }
