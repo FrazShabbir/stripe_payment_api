@@ -67,6 +67,9 @@ class GeneralController extends Controller
         if ($request->address) {
             setSettings('address', request('address'));
         }
+        if ($request->allow_register) {
+            setSettings('allow_register', request('allow_register'));
+        }
 
         return redirect()->back();
     }

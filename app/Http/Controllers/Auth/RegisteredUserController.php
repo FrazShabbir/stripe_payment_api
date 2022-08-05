@@ -21,7 +21,12 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
-        return view('backend.auth.register');
+        if(fromSettings('allow_register')=='yes'){
+            return view('backend.auth.register');
+        }else{
+            return redirect()->route('login')->with('error', 'Registration is not allowed');
+        }
+        
     }
 
     /**

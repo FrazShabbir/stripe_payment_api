@@ -58,6 +58,14 @@
                                                 value="{{ fromSettings('copyrights') ?? old('copyrights') }}">
                                         </div>
 
+                                        <div class="col-md-6 col-sm-12 mb-3">
+                                            <label for="role_name">Copyrights text</label>
+                                         <select name="allow_register" id="" class="form-control">
+                                            <option value="yes" {{ fromSettings('allow_register')=='yes'?'selected':'' }}>Yes</option>
+                                            <option value="no" {{ fromSettings('allow_register')=='no'?'selected':'' }}>No</option>
+                                         </select>
+                                        </div>
+
                                         {{-- <div class="col-md-6 col-sm-12 mb-3">
                                             <label for="">Dummy</label>
                                             <div class="form-group">
