@@ -63,7 +63,8 @@ class StripePaymentController extends Controller
                 'Accion'=>'PoA',
                 'useR' => $request->acc_no,
                 'Amount' => $request->amount,
-                'Approval'=>$charge->status
+                'Approval'=>$charge->status,
+                'transaction_id'=>$charge->id
             ]);
 
             // dd($response);
