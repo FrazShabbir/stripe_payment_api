@@ -150,7 +150,7 @@
         <!-- <img src="https://image.freepik.com/free-vector/purple-background-with-neon-frame_52683-34124.jpg"  class="bgimg " alt="">-->
         <div class="card">
             <div class="leftside">
-                <img src="{{ asset(fromSettings('logo')) ?? 'https://i.pinimg.com/originals/18/9d/dc/189ddc1221d9c1c779dda4ad37a35fa1.png' }}"
+                <img src="{{ asset(fromSettings('logo') ?? 'backend/images/fs_logo.png') }}"
                     class="product" alt="{{ fromSettings('short_title') }}"
                     style="max-width: 200px;max-height: 200px" />
             </div>
