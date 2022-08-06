@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class GeneralController extends Controller
 {
+    public function index()
+    {
+        return view('backend.index');
+    }
+
     public function dashboard()
     {
         return view('backend.dashboard.dashboard');

@@ -25,9 +25,9 @@ use App\Http\Controllers\StripePaymentController;
 //     }
 // });
 
-Route::get('/', function () {
-  return view('backend.index');
-});
+Route::get('/', [GeneralController::class, 'index'])->name('index');
+
+
 Route::post('stripe', [StripePaymentController::class, 'stripePost'])->name('stripe.post');
 
 Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard'],function () {
