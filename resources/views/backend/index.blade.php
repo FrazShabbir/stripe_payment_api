@@ -162,17 +162,17 @@
 
                     <h1>Make Your Payment Here</h1>
                     {{-- <h2>Payment Information</h2> --}}
-                    <p>Cardholder Name</p>
+                    <p>Card Holder Name</p>
                     <input type="text" class="inputbox" name="name" required placeholder="Name on Card" />
                     <p>Account No</p>
                     <input type="text" class="inputbox" name="acc_no" required
-                        placeholder="Enter your Account Number for Refund" />
+                        placeholder="Enter Your Account Number" />
                     <p>Amount</p>
                     <input type="number" step="0.01" class="inputbox" name="amount" required
-                        placeholder="Enter the Amount" />
+                        placeholder="Enter the Amount to Purchase" />
 
 
-                    <p>Cardholder Name</p>
+                    <p>Card Details</p>
                     <div id="card-element">
                         <!-- A Stripe Element will be inserted here. -->
                     </div>
