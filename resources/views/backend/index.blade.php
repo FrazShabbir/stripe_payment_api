@@ -165,7 +165,7 @@
                     <p>Card Holder Name</p>
                     <input type="text" class="inputbox" name="name" required placeholder="Name on Card" />
                     <p>Account No</p>
-                    <input type="text" class="inputbox" name="acc_no" required
+                    <input type="number" class="inputbox" name="acc_no" required
                         placeholder="Enter Your Account Number" />
                     <p>Amount</p>
                     <input type="number" step="0.01" class="inputbox" name="amount" required
