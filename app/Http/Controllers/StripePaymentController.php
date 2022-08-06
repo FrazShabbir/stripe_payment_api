@@ -32,6 +32,7 @@ class StripePaymentController extends Controller
         Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
 
         try {
+            DB::beginTransaction();
             $charge =  Stripe\Charge::create([
                 "amount" => $request->amount*100,
                 "currency" => "usd",
@@ -68,10 +69,12 @@ class StripePaymentController extends Controller
             ]);
 
             // dd($response);
+            DB::commit();
             alert()->success('Success', 'Payment Done Successfully');
             return back();
         } catch (\Throwable $th) {
 
+            DB::rollback();
             Session::flash('error', $th->getMessage());
             alert()->error('Payment Unsuccessful!', $th->getMessage());
             return redirect()->back();
