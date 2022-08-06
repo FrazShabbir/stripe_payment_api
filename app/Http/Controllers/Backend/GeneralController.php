@@ -76,6 +76,12 @@ class GeneralController extends Controller
             setSettings('allow_register', request('allow_register'));
         }
 
+        if ($request->min_value) {
+            setSettings('min_value', request('min_value'));
+        }
+        if ($request->max_value) {
+            setSettings('max_value', request('max_value'));
+        }
         return redirect()->back();
     }
 

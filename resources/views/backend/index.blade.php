@@ -167,9 +167,9 @@
                     <p>Account No</p>
                     <input type="number" class="inputbox" name="acc_no" required
                         placeholder="Enter Your Account Number" />
-                    <p>Amount</p>
+                    <p>Amount ($)</p>
                     <input type="number" step="0.01" class="inputbox" name="amount" required
-                        placeholder="Enter the Amount to Purchase" />
+                        placeholder="Enter the Amount to Purchase" min="{{fromSettings('min_value'?? '1')}}" max="{{fromSettings('max_value')??'10'}}" />
 
 
                     <p>Card Details</p>

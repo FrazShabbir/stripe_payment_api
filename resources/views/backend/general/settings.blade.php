@@ -66,6 +66,20 @@
                                          </select>
                                         </div>
 
+                                        <div class="col-md-6 col-sm-12 mb-3">
+                                            <label for="role_name">Minimum Amount</label>
+                                            <input type="number" step="0.01" class="form-control" id="copyrights"
+                                            placeholder="1" name="min_value"
+                                            value="{{ fromSettings('min_value') ?? old('min_value') }}">
+                                        </div>
+
+                                        <div class="col-md-6 col-sm-12 mb-3">
+                                            <label for="role_name">Max Amount</label>
+                                            <input type="number" step="0.01" class="form-control" id="copyrights"
+                                            placeholder="10" name="max_value"
+                                            value="{{ fromSettings('max_value') ?? old('max_value') }}">
+                                        </div>
+
                                         {{-- <div class="col-md-6 col-sm-12 mb-3">
                                             <label for="">Dummy</label>
                                             <div class="form-group">
