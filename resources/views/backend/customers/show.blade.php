@@ -28,6 +28,10 @@
                             <input type="text" class="form-control" name="name" disabled value="{{$customer->name}}">
                         </div>
                         <div class="col-md-6 col-sm-12 mb-3">
+                            <label for="first_name">Transaction Date/Time</label>
+                            <input type="text" class="form-control" name="name" disabled value="{{$customer->created_at}}">
+                        </div>
+                        <div class="col-md-6 col-sm-12 mb-3">
                             <label for="last_name">Account</label>
                             <input type="text" class="form-control" name="account" disabled value="{{$customer->account}}">
                         </div>
