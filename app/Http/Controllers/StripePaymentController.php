@@ -9,6 +9,7 @@ use Laravel\Cashier\Cashier;
 use App\Models\Customer;
 use App\Models\User;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\DB;
 
 class StripePaymentController extends Controller
 {
