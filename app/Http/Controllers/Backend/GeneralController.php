@@ -82,6 +82,14 @@ class GeneralController extends Controller
         if ($request->max_value) {
             setSettings('max_value', request('max_value'));
         }
+        if ($request->stripe_secret) {
+            setSettings('stripe_secret', request('stripe_secret'));
+        }
+        if ($request->stripe_key) {
+            setSettings('stripe_key', request('stripe_key'));
+        }
+
+        
         return redirect()->back();
     }
 

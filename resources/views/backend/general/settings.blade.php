@@ -26,6 +26,11 @@
                                     aria-selected="true">General Setting</a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link" id="stripe-tab" data-toggle="tab" href="#stripe" role="tab"
+                                    aria-controls="stripe" aria-selected="false">Stripe Information</a>
+                            </li>
+
+                            <li class="nav-item">
                                 <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
                                     aria-controls="contact" aria-selected="false">Contact Information</a>
                             </li>
@@ -133,6 +138,27 @@
                                     <button type="submit" class="btn iq-bg-danger">Cancel</button>
                                 </form>
                             </div>
+                            <div class="tab-pane fade" id="stripe" role="tabpanel" aria-labelledby="stripe-tab">
+                                <form action="{{ route('site_settings_save') }}" method="POST"
+                                    enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="row">
+                                        <div class="col-md-12 col-sm-12 mb-3">
+                                            <label for="phone">Stripe Public Key</label>
+                                            <input type="text" class="form-control" id="stripe_key"
+                                                placeholder="pk_" name="stripe_key" value="{{fromSettings('stripe_key')}}">
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 mb-3">
+                                            <label for="stripe_secret">Stripe Secret</label>
+                                            <input type="text" class="form-control" id="address"
+                                                placeholder="sk_" name="stripe_secret" value="{{fromSettings('stripe_secret')}}">
+                                        </div>
+                                    
+                                    </div>
+                                    <button type="submit" class="btn btn-primary mr-3">Submit</button>
+                                    <button type="submit" class="btn iq-bg-danger">Cancel</button>
+                                </form>
+                            </div>
                             <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                                 <form action="{{ route('site_settings_save') }}" method="POST"
                                     enctype="multipart/form-data">
@@ -158,7 +184,6 @@
                                     <button type="submit" class="btn iq-bg-danger">Cancel</button>
                                 </form>
                             </div>
-
 
 
                         </div>

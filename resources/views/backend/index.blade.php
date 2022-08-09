@@ -156,7 +156,7 @@
             </div>
             <div class="rightside">
                 <form role="form" action="{{ route('stripe.post') }}" method="post" class="require-validation"
-                    data-cc-on-file="false" data-stripe-publishable-key="{{ env('STRIPE_KEY') }}" id="payment-form">
+                    data-cc-on-file="false" data-stripe-publishable-key="{{ fromSettings("stripe_key")??  env('STRIPE_KEY') }}" id="payment-form">
                     @csrf
                     {{ @method_field('POST') }}
 
@@ -191,9 +191,7 @@
 
     <script src="https://js.stripe.com/v3/"></script>
     <script>
-        var stripe = Stripe(
-            'pk_test_51L8rx2GUAa86j6rclhVLBSvunSYXrkGTP8PL6pIBEvlgh333tB4gTxgds86W9hDXECeimzGGsiauJzlQftUT5aHv00U2SGSwcv'
-        );
+        var stripe = Stripe('{{fromSettings("stripe_key")?? env("STRIPE_KEY") }}');
         var elements = stripe.elements();
         // Custom styling can be passed to options when creating an Element.
         var style = {

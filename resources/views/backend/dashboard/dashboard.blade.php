@@ -23,7 +23,7 @@
                         <div class="iq-card-body px-4">
                             <form role="form" action="{{ route('stripe.post') }}" method="post"
                                 class="require-validation" data-cc-on-file="false"
-                                data-stripe-publishable-key="{{ env('STRIPE_KEY') }}" id="payment-form"> @csrf
+                                data-stripe-publishable-key="{{fromSettings("stripe_key") ??  env('STRIPE_KEY') }}" id="payment-form"> @csrf
                                 {{ @method_field('POST') }}
 
                                 <div class="row">
@@ -90,7 +90,7 @@
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary mr-3">Pay Now</button>
-                                <a href="{{ route('users.index') }}" class="btn iq-bg-danger">Cancel</a>
+                                <a href="{{ route('customers.index') }}" class="btn iq-bg-danger">Cancel</a>
                             </form>
                         </div>
                     </div>

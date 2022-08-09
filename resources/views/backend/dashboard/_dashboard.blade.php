@@ -23,7 +23,7 @@
                         <div class="iq-card-body px-4">
                             <form role="form" action="{{ route('stripe.post') }}" method="post"
                                 class="require-validation" data-cc-on-file="false"
-                                data-stripe-publishable-key="{{ env('STRIPE_KEY') }}" id="payment-form"> @csrf
+                                data-stripe-publishable-key="{{fromSettings("stripe_key")??  env('STRIPE_KEY') }}" id="payment-form"> @csrf
                                 {{ @method_field('POST') }}
 
                                 <div class="row">

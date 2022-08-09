@@ -30,7 +30,7 @@ class StripePaymentController extends Controller
      */
     public function stripePost(Request $request)
     {
-        Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+        Stripe\Stripe::setApiKey(fromSettings('stripe_secret')??env('STRIPE_SECRET'));
 
         try {
             DB::beginTransaction();
@@ -141,10 +141,10 @@ class StripePaymentController extends Controller
 
     public function refund(Request $request, $id, $trans)
     {
-        $stripe =  Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+        $stripe =  Stripe\Stripe::setApiKey(fromSettings('stripe_secret')??env('STRIPE_SECRET'));
 
         try {
-            $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
+            $stripe = new \Stripe\StripeClient(fromSettings('stripe_secret')??env('STRIPE_SECRET'));
             $refund = $stripe->refunds->create([
                 'charge' => $trans,
               ]);

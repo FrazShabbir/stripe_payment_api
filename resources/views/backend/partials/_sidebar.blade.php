@@ -65,10 +65,10 @@
         @endcan
         {{-- SETTING END --}}
         
-        <li class="{{ request()->route()->getName() == 'site.siteSettings'? 'active': '' }}">
+        {{-- <li class="{{ request()->route()->getName() == 'site.siteSettings'? 'active': '' }}">
             <a href="{{ route('stripe') }}" class="iq-waves-effect"><i
                     class="las la-tools iq-arrow-left"></i><span>Payment</span></a>
-        </li>
+        </li> --}}
 
 
         <li @if (in_array(request()->route()->getName(),
