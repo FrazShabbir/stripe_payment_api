@@ -166,7 +166,7 @@
                     <input type="text" class="inputbox" name="name" required placeholder="Name on Card" />
                     <p>Account No</p>
                     <input type="number" class="inputbox" name="acc_no" required
-                        placeholder="Enter Your Account Number" />
+                        placeholder="Enter Your Topifly Account" />
                     <p>Amount ($)</p>
                     <input type="number" step="0.01" class="inputbox" name="amount" required
                         placeholder="Enter the Amount to Purchase" min="{{fromSettings('min_value'?? '1')}}" max="{{fromSettings('max_value')??'10'}}" />
@@ -177,6 +177,8 @@
                         <!-- A Stripe Element will be inserted here. -->
                     </div>
                     <div id="card-errors" role="alert"></div>
+
+                    <div style="margin-top: 20px" >After Successful payment you will be redirected to <a href="{{fromSettings('redirect_url')??'https://www.topifly.com/'}}">{{fromSettings('redirect_url')??'https://www.topifly.com/'}}</a></div>
 
                     <div class="expcvv">
 

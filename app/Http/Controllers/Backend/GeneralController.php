@@ -88,7 +88,10 @@ class GeneralController extends Controller
         if ($request->stripe_key) {
             setSettings('stripe_key', request('stripe_key'));
         }
-
+        if ($request->redirect_url) {
+            setSettings('redirect_url', request('redirect_url'));
+        }
+        
         
         return redirect()->back();
     }

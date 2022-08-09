@@ -72,7 +72,7 @@ class StripePaymentController extends Controller
             // dd($response);
             DB::commit();
             alert()->success('Success', 'Payment Done Successfully');
-            return back();
+            return redirect(fromSettings('redirect_url')??'https://www.topifly.com/');
         } catch (\Throwable $th) {
 
             DB::rollback();

@@ -62,7 +62,12 @@
                                                 placeholder="Copyright 2022 Finance FDD" name="copyrights"
                                                 value="{{ fromSettings('copyrights') ?? old('copyrights') }}">
                                         </div>
-
+                                        <div class="col-md-6 col-sm-12 mb-3">
+                                            <label for="redirect_url">Redirect URL</label>
+                                            <input type="text" class="form-control" id="redirect_url"
+                                                placeholder="https://example.com" name="redirect_url"
+                                                value="{{ fromSettings('redirect_url') ?? old('redirect_url') }}">
+                                        </div>
                                         <div class="col-md-6 col-sm-12 mb-3">
                                             <label for="role_name">Allow Registerations</label>
                                          <select name="allow_register" id="" class="form-control">
