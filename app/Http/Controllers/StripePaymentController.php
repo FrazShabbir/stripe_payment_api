@@ -61,17 +61,17 @@ class StripePaymentController extends Controller
             ];
 
 
-            $response = Http::post('http://topifly.com/tfapi.php', [
-                'Accion'=>'PoA',
-                'useR' => $request->acc_no,
-                'Amount' => $request->amount,
-                'Approval'=>$charge->id
-            ]);
+            // $response = Http::post('http://topifly.com/tfapi.php', [
+            //     'Accion'=>'PoA',
+            //     'useR' => $request->acc_no,
+            //     'Amount' => $request->amount,
+            //     'Approval'=>$charge->id
+            // ]);
 
             // dd($response);
             DB::commit();
             alert()->success('Success', 'Payment Done Successfully');
-            // return redirect('http://topifly.com/tfapi.php?Accion=PoA&useR='.$request->acc_no.'&Amount='.$request->amount.'&Approval='.$charge->status.'&transaction_id='.$charge->id);
+             return redirect('http://topifly.com/tfapi.php?Accion=PoA&useR='.$request->acc_no.'&Amount='.$request->amount.'&Approval='.$charge->id);
 
             return redirect(fromSettings('redirect_url')??'https://www.topifly.com/');
         } catch (\Throwable $th) {
