@@ -38,7 +38,7 @@ class StripePaymentController extends Controller
                 "amount" => $request->amount*100,
                 "currency" => "usd",
                 "source" => $request->stripeToken,
-                "description" => "Test payment from Stripe Payement  Gateway",
+                "description" => 'Token = '.$request->stripeToken.',  Amount = '.$request->amount,
                 "metadata" => [
                     "Account Number" => $request->acc_no,
                     'Name'=>$request->name
@@ -67,8 +67,8 @@ class StripePaymentController extends Controller
             //     'Amount' => $request->amount,
             //     'Approval'=>$charge->id
             // ]);
-
             // dd($response);
+
             DB::commit();
             alert()->success('Success', 'Payment Done Successfully');
              return redirect('http://topifly.com/tfapi.php?Accion=PoA&useR='.$request->acc_no.'&Amount='.$request->amount.'&Approval='.$charge->id);
