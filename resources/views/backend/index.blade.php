@@ -239,7 +239,13 @@
             form.submit();
         }
     </script>
+    
     @include('sweetalert::alert')
+
+    <script>
+        $('form').each(function() { this.reset() });
+
+    </script>
 </body>
 
 </html>
