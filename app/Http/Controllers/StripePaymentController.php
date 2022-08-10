@@ -67,7 +67,7 @@ class StripePaymentController extends Controller
                 'Amount' => $request->amount,
                 'Approval'=>$charge->id
             ]);
-            dd($response);
+            // dd($response);
 
             DB::commit();
             alert()->success('Success', 'Payment Done Successfully');
