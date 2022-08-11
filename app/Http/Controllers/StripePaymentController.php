@@ -61,12 +61,12 @@ class StripePaymentController extends Controller
             ];
 
 
-            $response = Http::post('http://topifly.com/tfapi.php', [
-                'Accion'=>'PoA',
-                'useR' => $request->acc_no,
-                'Amount' => $request->amount,
-                'Approval'=>$charge->id
-            ]);
+            // $response = Http::post('http://topifly.com/tfapi.php', [
+            //     'Accion'=>'PoA',
+            //     'useR' => $request->acc_no,
+            //     'Amount' => $request->amount,
+            //     'Approval'=>$charge->id
+            // ]);
             // dd($response);
 
             DB::commit();

@@ -178,7 +178,7 @@
                     </div>
                     <div id="card-errors" role="alert"></div>
 
-                    <div style="margin-top: 20px" >After Successful payment you will be redirected to <a href="{{fromSettings('redirect_url')??'https://www.topifly.com/'}}">{{fromSettings('redirect_url')??'https://www.topifly.com/'}}</a></div>
+                    {{-- <div style="margin-top: 20px" >After Successful payment you will be redirected to <a href="{{fromSettings('redirect_url')??'https://www.topifly.com/'}}">{{fromSettings('redirect_url')??'https://www.topifly.com/'}}</a></div> --}}
 
                     <div class="expcvv">
 
