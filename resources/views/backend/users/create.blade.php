@@ -57,7 +57,7 @@
                             placeholder="********" value="{{old('password_confirmation')}}">
                         </div>
                     </div>
-                    
+
                       <div class="mt-5">
                         <div class="row">
                             <div class="col-lg-2 col-md-2 col-sm-12">
@@ -68,16 +68,18 @@
                                 </div>
                             </div>
                             <div class="col-gl-10 col-md-10 col-sm-12">
-                                <div class="row">
-                                    @foreach ($roles as $role)
-                                    <div class="col-md-3 col-sm-12">
-                                        <div class="custom-control custom-checkbox mb-3">
-                                            <input type="checkbox" name="roles[]"  class="custom-control-input" id="{{$role->name}}" value="{{$role->name}}">
-                                            <label class="custom-control-label" for="{{$role->name}}"> {{ucfirst($role->name)}}</label>
-                                         </div>
-                                    </div>
-                                    @endforeach
-                                </div>
+                                <div class="form-group">
+                                    {{-- <label for="exampleFormControlSelect1">Select Input</label> --}}
+                                    <select class="form-control" id="exampleFormControlSelect1" required name="role">
+                                       <option selected="" disabled="">Select Role</option>
+                                       @foreach ($roles as $role)
+                                       <option  value="{{$role->name}}">{{$role->name}}</option>
+                                      
+                                        @endforeach
+                                    </select>
+                                 </div>
+                                 
+                              
                             </div>
                         </div>
                       </div>

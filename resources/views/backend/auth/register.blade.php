@@ -75,6 +75,16 @@
                                     <label for="exampleInputEmail2">Username</label>
                                     <input type="text" name="username" class="form-control mb-0" id="exampleInputEmail2" placeholder="Enter Username">
                                 </div>
+                                <div class="form-group">
+                                  <label for="exampleInputEmail2">Account Type</label>
+                                  <select name="role" id="" class="form-control" required> 
+                                    @foreach ( $roles as $i )
+                                    <option value="{{$i->name}}">{{$i->name}}</option>
+  
+                                    @endforeach
+                                  </select>
+                           
+                              </div>
                                   <div class="form-group">
                                       <label for="exampleInputPassword1">Password</label>
                                       <input type="password" name="password" class="form-control mb-0" id="exampleInputPassword1" placeholder="********">

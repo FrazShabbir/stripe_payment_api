@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\Support\Str;
+use Spatie\Permission\Models\Role;
 
 class RegisteredUserController extends Controller
 {
@@ -22,7 +23,10 @@ class RegisteredUserController extends Controller
     public function create()
     {
         if(fromSettings('allow_register')=='yes'){
-            return view('backend.auth.register');
+            $roles = Role::where('role_for','Admin')->get();
+           
+            return view('backend.auth.register')
+            ->withRoles($roles);
         }else{
             return redirect()->route('login')->with('error', 'Registration is not allowed');
         }
@@ -62,6 +66,8 @@ class RegisteredUserController extends Controller
         ]);
 
         event(new Registered($user));
+        $user->assignRole($request->role);
+        $user->save();
         Auth::login($user);
         return redirect(RouteServiceProvider::HOME);
     }

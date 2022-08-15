@@ -1,10 +1,14 @@
 @extends('backend.main')
-@section('title', 'Title')
+@section('title', 'All Users')
 
 @section('styles')
 @endsection
 
 @push('css')
+@push('css')
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
+@endpush
 @endpush
 
 
@@ -23,7 +27,7 @@
                         <div class="iq-card-body">
                             <div class="table-responsive">
                         
-                                <table id="user-list-table" class="table table-striped table-bordered mt-4" role="grid"
+                                <table id="fdd-table" class="table table-striped table-bordered mt-4" role="grid"
                                     aria-describedby="user-list-page-info">
                                     <thead>
                                         <tr>
@@ -99,4 +103,47 @@
 @endsection
 
 @push('js')
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+
+
+<script>
+    $(document).ready( function () {
+        $('#fdd-table').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+            {
+                extend: 'copyHtml5',
+                exportOptions: {
+                    columns: [ 0, 1, 2, 3 ]
+                }
+            },
+            {
+                extend: 'excelHtml5',
+                exportOptions: {
+                    columns: ':visible'
+                }
+            },
+            {
+                extend: 'pdfHtml5',
+                exportOptions: {
+                    columns: [ 0, 1, 2, 3 ]
+                }
+            },
+            'colvis'
+        ],
+            // "searching": false,
+            // "paging": false,
+            "info": false,
+            "lengthChange": false,
+
+        });
+        $('#fdd-table_paginate ul').addClass("pagination-sm");
+
+    } );
+</script>
 @endpush

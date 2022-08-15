@@ -7,7 +7,7 @@
 
         {{-- @if (getuser()->hasRole('Super Admin')) --}}
         {{-- ROLES MANAGEMENT ONLY FOR SUPER ADMIN --}}
-
+        @canany(['Create Roles', 'Read Roles'])
         <li @if (in_array(request()->route()->getName(),
             ['roles.create', 'roles.edit', 'roles.index', 'roles.show'])) class="active" @endif>
             <a href="#userRoles" class="iq-waves-effect" data-toggle="collapse"
@@ -26,6 +26,7 @@
                 @endcan
             </ul>
         </li>
+        @endcanany
         {{-- ROLE MANAGEMENT END --}}
 
         {{-- @endif --}}
@@ -33,6 +34,7 @@
 
         {{-- @if (getuser()->hasRole('Super Admin')) --}}
         {{-- USER MANAGEMENT ONLY FOR SUPER ADMIN --}}
+        @canany(['Create Users', 'Read Users'])
         <li @if (in_array(request()->route()->getName(),
             ['users.create', 'users.edit', 'users.index', 'users.show'])) class="active" @endif>
             <a href="#userinfo" class="iq-waves-effect" data-toggle="collapse"
@@ -51,6 +53,7 @@
                 @endcan
             </ul>
         </li>
+        @endcanany
         {{-- USER MANAGEMENT END --}}
         {{-- @endif --}}
 

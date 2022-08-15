@@ -29,7 +29,7 @@
                         </div>
                         <div class="col-md-6 col-sm-12 mb-3">
                             <label for="first_name">Transaction Date/Time</label>
-                            <input type="text" class="form-control" name="name" disabled value="{{$customer->created_at}}">
+                            <input type="text" class="form-control" name="name" disabled value="{{ date('d-m-y / H:i:s',strtotime($customer->created_at)) }}">
                         </div>
                         <div class="col-md-6 col-sm-12 mb-3">
                             <label for="last_name">Account</label>

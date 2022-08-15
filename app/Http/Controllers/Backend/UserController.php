@@ -82,11 +82,13 @@ class UserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        if(isset($request->roles)){
-            foreach ($request->roles as $assignRole) {
-                $user->assignRole($assignRole);
-            }
-        }
+        $user->assignRole($request->role);
+
+        // if(isset($request->roles)){
+        //     foreach ($request->roles as $assignRole) {
+        //         $user->assignRole($assignRole);
+        //     }
+        // }
         $user->save();
         // Password::sendResetLink($request->only(['email']));
         alert()->success('New User Added');
@@ -172,12 +174,16 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->status = $request->status;
         // $user->password = Hash::make($request->password);
-        if(isset($request->roles)){
-            $user->roles()->detach();
-            foreach ($request->roles as $assignRole) {
-                $user->assignRole($assignRole);
-            }
-        }
+
+        $user->roles()->detach();
+        $user->assignRole($request->role);
+
+        // if(isset($request->roles)){
+        //     $user->roles()->detach();
+        //     foreach ($request->roles as $assignRole) {
+        //         $user->assignRole($assignRole);
+        //     }
+        // }
         $user->save();
 
         alert()->success('User Details Updated');

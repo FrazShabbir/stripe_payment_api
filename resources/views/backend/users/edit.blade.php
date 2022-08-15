@@ -70,17 +70,32 @@
                                 </div>
                             </div>
                             <div class="col-gl-10 col-md-10 col-sm-12">
+                                <div class="form-group">
+                                    {{-- <label for="exampleFormControlSelect1">Select Input</label> --}}
+                                    <select class="form-control" id="exampleFormControlSelect1" required name="role">
+                                       <option selected="" disabled="">Select Role</option>
+                                       @foreach ($roles as $role)
+                                       <option  value="{{$role->name}}" {{$user->hasRole($role->name)?'selected':''}} >{{$role->name}}</option>
+                                      
+                                        @endforeach
+                                    </select>
+                                 </div>
+                                 
+                              
+                            </div>
+
+                            {{-- <div class="col-gl-10 col-md-10 col-sm-12">
                                 <div class="row">
                                     @foreach ($roles as $role)
                                     <div class="col-md-3 col-sm-12">
                                         <div class="custom-control custom-checkbox mb-3">
-                                            <input type="checkbox" name="roles[]"  class="custom-control-input" {{$user->hasRole($role->name)?'checked':''}}  id="{{$role->name}}" value="{{$role->name}}">
+                                            <input type="checkbox" name="roles[]"  class="custom-control-input"  id="{{$role->name}}" value="{{$role->name}}">
                                             <label class="custom-control-label" for="{{$role->name}}"> {{ucfirst($role->name)}}</label>
                                          </div>
                                     </div>
                                     @endforeach
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                       </div>
                       <div class="mt-5 mb-4">
