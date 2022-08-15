@@ -37,13 +37,28 @@
                      <div class="row">
                         <div class="col-md-6 col-sm-12 mb-3">
                             <label class="required" for="username">Username:</label>
-                            <input type="text" class="form-control" id="username" name="username" placeholder="e.g. aliraza12" value="{{$user->username}}">
+                            <input type="text" class="form-control" id="username" name="username" placeholder="e.g. aliraza12" value="{{$user->username}}" readonly>
                         </div>
                         <div class="col-md-6 col-sm-12 mb-3">
                             <label class="required" for="email">Email address:</label>
                             <input type="email" class="form-control" id="email" name="email" placeholder="e.g. abc@email.com" value="{{$user->email}}">
                         </div>
                      </div>
+
+
+                     <div class="row">
+                        <div class="col-md-6 col-sm-12 mb-3">
+                            <label for="password" class="">Password: <small>If you want to change password please fill both fields</small></label>
+                            <input type="password" class="form-control" id="password" name="password"
+                                placeholder="********" value="{{old('password')}}">
+                        </div>
+                        <div class="col-md-6 col-sm-12 mb-3">
+                            <label for="password_confirmation" class="">Confirm Password:</label>
+                            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation"
+                            placeholder="********" value="{{old('password_confirmation')}}">
+                        </div>
+                    </div>
+
                   
                       <div class="mt-5">
                         <div class="row">

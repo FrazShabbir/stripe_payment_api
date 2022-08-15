@@ -4,7 +4,11 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
+use Illuminate\Validation\Rules;
+use Illuminate\Support\Facades\Password;
 class GeneralController extends Controller
 {
     public function index()
@@ -103,6 +107,8 @@ class GeneralController extends Controller
 
     public function updateProfile(Request $request)
     {
+        $user = User::findOrFail(auth()->user()->id);
+
         $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
@@ -111,7 +117,15 @@ class GeneralController extends Controller
             //'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $user = User::findOrFail(auth()->user()->id);
+
+
+        if($request->password){
+            $request->validate([
+                'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            ]);
+            $user->password = Hash::make($request->password);
+        }
+
         // if(Auth::user()->id!=$user->id){
         //     return redirect()->back()->with('error', 'You are not authorized to perform this action.');
         // }

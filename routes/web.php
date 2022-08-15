@@ -76,6 +76,8 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard'],function () {
     
     Route::get('reset-password/{user}', [UserController::class, 'reset_password'])->name('users.reset_password');
     Route::get('my-profile', [GeneralController::class, 'myProfile'])->name('site.myProfile');
+    Route::put('my-profile/update', [GeneralController::class, 'updateProfile'])->name('site.updateProfile');
+    
     Route::get('site-settings', [GeneralController::class, 'siteSettings'])->name('site.siteSettings');
     Route::post('/site-settings-save', [GeneralController::class, 'save_general_settings'])->name('site_settings_save');    
 });

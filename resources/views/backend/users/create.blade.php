@@ -45,6 +45,19 @@
                         </div>
                      </div>
            
+                     <div class="row">
+                        <div class="col-md-6 col-sm-12 mb-3">
+                            <label for="password" class="required">Password:</label>
+                            <input type="password" class="form-control" id="password" name="password"
+                                placeholder="********" value="{{old('password')}}">
+                        </div>
+                        <div class="col-md-6 col-sm-12 mb-3">
+                            <label for="password_confirmation" class="required">Confirm Password:</label>
+                            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation"
+                            placeholder="********" value="{{old('password_confirmation')}}">
+                        </div>
+                    </div>
+                    
                       <div class="mt-5">
                         <div class="row">
                             <div class="col-lg-2 col-md-2 col-sm-12">

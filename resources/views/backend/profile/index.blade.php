@@ -1,5 +1,5 @@
 @extends('backend.main')
-@section('title', 'Create User - FDD')
+@section('title', 'My Profile - FDD')
 
 @section('styles')
 @endsection
@@ -21,9 +21,9 @@
                    </div>
                 </div>
                 <div class="iq-card-body px-4">
-                   <form action="{{route('users.store')}}" method="POST">
+                   <form action="{{route('site.updateProfile')}}" method="POST">
                     @csrf
-                    {{@method_field('POST')}}
+                    {{@method_field('put')}}
                     <div class="row">
                         <div class="col-md-6 col-sm-12 mb-3">
                             <label for="first_name">First Name</label>
@@ -37,13 +37,28 @@
                      <div class="row">
                         <div class="col-md-6 col-sm-12 mb-3">
                             <label for="username">Username:</label>
-                            <input type="text" class="form-control" id="username" name="username" placeholder="e.g. aliraza12" value="{{Auth::user()->username}}">
+                            <input type="text" class="form-control" id="username" name="username" placeholder="e.g. aliraza12" value="{{Auth::user()->username}}" readonly>
                         </div>
                         <div class="col-md-6 col-sm-12 mb-3">
                             <label for="email">Email address:</label>
                             <input type="email" class="form-control" id="email" name="email" placeholder="e.g. abc@email.com" value="{{Auth::user()->email}}">
                         </div>
                      </div>
+
+                     <div class="row">
+                        <div class="col-md-6 col-sm-12 mb-3">
+                            <label for="password" class="">Password: <small>If you want to change password please fill both fields</small></label>
+                            <input type="password" class="form-control" id="password" name="password"
+                                placeholder="********">
+                        </div>
+                        <div class="col-md-6 col-sm-12 mb-3">
+                            <label for="password_confirmation" class="">Confirm Password:</label>
+                            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation"
+                            placeholder="********" >
+                        </div>
+                    </div>
+
+
                       <div class="mt-5">
                         <div class="row">
                             <div class="col-lg-2 col-md-2 col-sm-12">
@@ -67,6 +82,7 @@
                             </div>
                         </div>
                       </div>
+
                       <div class="mt-5 mb-4">
                         <div class="row">
                             <div class="col-lg-2 col-md-2 col-sm-12">

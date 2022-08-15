@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Password;
@@ -65,7 +65,7 @@ class UserController extends Controller
             'last_name' => ['required', 'string', 'max:255'],
             'username' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            // 'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
         $username = str_replace(' ', '-', $request->username);
         // check username exist
@@ -88,7 +88,7 @@ class UserController extends Controller
             }
         }
         $user->save();
-        Password::sendResetLink($request->only(['email']));
+        // Password::sendResetLink($request->only(['email']));
         alert()->success('New User Added');
 
         return redirect()->route('users.index');
@@ -159,6 +159,13 @@ class UserController extends Controller
             // 'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        if($request->password){
+            $request->validate([
+                'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            ]);
+            $user->password = Hash::make($request->password);
+        }
+        
         $user->first_name = $request->first_name;
         $user->last_name = $request->last_name;
         // $user->username = $request->username;
