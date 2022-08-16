@@ -208,7 +208,7 @@
         <div class="es-rights">
             <p>
                 <small>
-                    <a href="">EssentialSofts</a>
+                    <a href="https://essentialsofts.com/">Essentialsofts.com</a>
                 </small>
             </p>
         </div>
