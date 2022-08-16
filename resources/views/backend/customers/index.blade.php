@@ -273,7 +273,7 @@
         <script>
             $(function() {
                 $('#delivery_date').daterangepicker({
-
+                    "startDate": "2022-01-01",
                     locale: {
                         format: 'YYYY-MM-DD'
                     }
