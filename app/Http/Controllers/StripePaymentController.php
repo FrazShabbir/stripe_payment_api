@@ -94,12 +94,35 @@ class StripePaymentController extends Controller
     }
 
 
-    public function customers()
+    public function customers(Request $request)
     {
         if (! auth()->user()->hasPermissionTo('Read Customers')) {
             abort(403);
         }
-        $customers = Customer::all();
+          // $from_date = $request->date_from;
+        // $$request->date_to = $request->date_to ?? date('Y-m-d');
+        // dd($request->date_to);
+
+        $customers = Customer::
+        when(!empty(request()->input('date_from') and request()->input('date_to') ), function ($q) {
+            return $q->whereBetween('created_at', [request()->date_from, request()->date_to]);
+        })
+     
+        ->when(!empty(request()->input('account_no')), function ($q) {
+            return $q->where('account', '=', request()->input('account_no'));
+        })
+        ->when(!empty(request()->input('name')), function ($q) {
+            return $q->where('name', '=', request()->input('name'));
+        })
+        ->when(!empty(request()->input('transaction_id')), function ($q) {
+            return $q->where('transaction_id', '=', request()->input('transaction_id'));
+        })
+        ->when(!empty(request()->input('status')), function ($q) {
+            return $q->where('status', '=', request()->input('status'));
+        })
+        ->orderBy('id', 'DESC')
+        ->get();
+        // dd($customers);
         return view('backend.customers.index')->withCustomers($customers);
     }
     public function customerShow($id)
