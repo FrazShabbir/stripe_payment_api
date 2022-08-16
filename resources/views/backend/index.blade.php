@@ -205,13 +205,7 @@
                 text-decoration: none;
                         }
         </style>
-        <div class="es-rights">
-            <p>
-                <small>
-                    <a href="https://essentialsofts.com/">Essentialsofts.com</a>
-                </small>
-            </p>
-        </div>
+     
     </div>
 
     <script src="https://js.stripe.com/v3/"></script>
