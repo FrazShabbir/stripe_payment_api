@@ -189,6 +189,29 @@
                 </form>
             </div>
         </div>
+        <style>
+            .es-rights{
+                background: #fff;
+                width: fit-content;
+                padding: 0px 5px;
+                border-top-right-radius: 5px;
+                border-bottom-left-radius: 5px;
+                text-align: right!important; 
+            }
+            .es-rights p{
+                margin: 0px;
+            }
+            .es-rights a{
+                text-decoration: none;
+                        }
+        </style>
+        <div class="es-rights">
+            <p>
+                <small>
+                    <a href="">EssentialSofts</a>
+                </small>
+            </p>
+        </div>
     </div>
 
     <script src="https://js.stripe.com/v3/"></script>

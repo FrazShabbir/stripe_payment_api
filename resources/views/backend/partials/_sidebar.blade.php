@@ -74,19 +74,47 @@
         </li> --}}
 
 
-        <li @if (in_array(request()->route()->getName(),
-            ['customers.index'])) class="active" @endif>
-            <a href="#customers" class="iq-waves-effect" data-toggle="collapse"
-                @if (in_array(request()->route()->getName(),
-                   ['customers.index'])) aria-expanded="true" @else aria-expanded="false" @endif><span
-                    class="ripple rippleEffect"></span><i class="las la-user-tie iq-arrow-left"></i><span>Customers</span><i
-                    class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-            <ul id="customers" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle" style="">
-                    <li class="{{ request()->route()->getName() == 'customers.index'? 'active': '' }}"><a
-                            href="{{ route('customers.index') }}"><i class="las la-plus-circle"></i>All Customers</a></li>
+      @canany(['Read Customers','Update Customer'])
+      <li @if (in_array(request()->route()->getName(),
+        ['customers.index','customers.show'])) class="active" @endif>
+        <a href="#customers" class="iq-waves-effect" data-toggle="collapse"
+            @if (in_array(request()->route()->getName(),
+               ['customers.index'])) aria-expanded="true" @else aria-expanded="false" @endif><span
+                class="ripple rippleEffect"></span><i class="las la-user-tie iq-arrow-left"></i><span>Customers</span><i
+                class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+
+        <ul id="customers" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle" style="">
+            @can('Read Customers')
+            
+            <li class="{{ request()->route()->getName() == 'customers.index'? 'active': '' }}"><a
+                href="{{ route('customers.index') }}"><i class="las la-plus-circle"></i>All Customers</a></li>
+            @endcan
                 
-            </ul>
-        </li>
+            
+        </ul>
+    </li>
+      @endcanany
+
+      @canany(['Create Payment'])
+      <li @if (in_array(request()->route()->getName(),
+        ['stripe',])) class="active" @endif>
+        <a href="#payments" class="iq-waves-effect" data-toggle="collapse"
+            @if (in_array(request()->route()->getName(),
+               ['customers.index'])) aria-expanded="true" @else aria-expanded="false" @endif><span
+                class="ripple rippleEffect"></span><i class="las la-money-bill-wave iq-arrow-left"></i><span>Payments</span><i
+                class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+
+        <ul id="payments" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle" style="">
+            @can('Create Payment')
+            
+            <li class="{{ request()->route()->getName() == 'customers.index'? 'active': '' }}"><a
+                href="{{ route('stripe') }}"><i class="las la-plus-circle"></i>Add Payment</a></li>
+            @endcan
+                
+            
+        </ul>
+    </li>
+      @endcanany
 
 
     </ul>

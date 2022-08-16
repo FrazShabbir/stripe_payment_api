@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Customer;
 use Illuminate\Support\Facades\Hash;
 
 use Illuminate\Validation\Rules;
@@ -18,16 +19,44 @@ class GeneralController extends Controller
 
     public function dashboard()
     {
-        return view('backend.dashboard.dashboard');
+        $months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+        $numberOfCustomers = [];
+
+        foreach ($months as $key => $value) {
+            $numberOfCustomers[] = Customer::where(\DB::raw("DATE_FORMAT(created_at, '%m')"), $value)->count();
+        }
+
+        $monthlyAmount = [];
+
+   
+
+        // function to get mounth wise amount
+        foreach ($months as $key => $value) {
+            $monthlyAmount[]=Customer::where(\DB::raw("DATE_FORMAT(created_at, '%m')"), $value)->get()->sum('amount');
+        };
+
+        $customers = Customer::orderBy('id', 'desc')->take(5)->get();
+        return view('backend.dashboard.dashboard')
+        ->with('months', json_encode($months, JSON_NUMERIC_CHECK))
+        ->with('numberOfCustomers', json_encode($numberOfCustomers, JSON_NUMERIC_CHECK))
+        ->with('monthlyAmount', json_encode($monthlyAmount, JSON_NUMERIC_CHECK))
+        ->withCustomers($customers);
     }
 
     public function siteSettings()
     {
+        if (! auth()->user()->hasPermissionTo('Update Settings')) {
+            abort(403);
+        }
+
         return view('backend.general.settings');
     }
 
     public function save_general_settings(Request $request)
     {
+        if (! auth()->user()->hasPermissionTo('Update Settings')) {
+            abort(403);
+        }
         if ($request->site_title) {
             setSettings('site_title', request('site_title'));
         }

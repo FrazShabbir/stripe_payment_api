@@ -20,7 +20,12 @@ class StripePaymentController extends Controller
     */
     public function stripe()
     {
-        return view('backend.dashboard.dashboard');
+        
+        if (! auth()->user()->hasPermissionTo('Create Payment')) {
+            abort(403);
+        }
+
+        return view('backend.payment.create');
     }
 
     /**
@@ -30,6 +35,10 @@ class StripePaymentController extends Controller
      */
     public function stripePost(Request $request)
     {
+        if (! auth()->user()->hasPermissionTo('Create Payment')) {
+            abort(403);
+        }
+
         Stripe\Stripe::setApiKey(fromSettings('stripe_secret')??env('STRIPE_SECRET'));
 
         try {
@@ -87,11 +96,17 @@ class StripePaymentController extends Controller
 
     public function customers()
     {
+        if (! auth()->user()->hasPermissionTo('Read Customers')) {
+            abort(403);
+        }
         $customers = Customer::all();
         return view('backend.customers.index')->withCustomers($customers);
     }
     public function customerShow($id)
     {
+        if (! auth()->user()->hasPermissionTo('Read Customers')) {
+            abort(403);
+        }
         $customer = Customer::findOrFail($id);
 
         return view('backend.customers.show')
@@ -100,6 +115,10 @@ class StripePaymentController extends Controller
 
     public function processRefund($id, $trans)
     {
+        if (! auth()->user()->hasPermissionTo('Update Customers')) {
+            abort(403);
+        }
+
         $customerid = $id;
         $customer = Customer::find($id);
         if ($customer->refund_id) {
@@ -112,7 +131,10 @@ class StripePaymentController extends Controller
         ->withTrans($trans);
     }
     public function processManualRefund($id, $trans)
-    {$customerid = $id;
+    {  if (! auth()->user()->hasPermissionTo('Update Customers')) {
+        abort(403);
+    }
+        $customerid = $id;
         $customer = Customer::find($id);
         if ($customer->refund_id) {
             alert()->info('Info', 'This Transaction  is Already Refunded');
@@ -126,6 +148,9 @@ class StripePaymentController extends Controller
     }
     public function manualRefund(Request $request, $id, $trans)
     {
+        if (! auth()->user()->hasPermissionTo('Update Customers')) {
+            abort(403);
+        }
         $request->validate([
             'refund_id'=>'required',
             'reason'=>'required'
@@ -142,6 +167,10 @@ class StripePaymentController extends Controller
 
     public function refund(Request $request, $id, $trans)
     {
+        if (! auth()->user()->hasPermissionTo('Update Customers')) {
+            abort(403);
+        }
+
         $stripe =  Stripe\Stripe::setApiKey(fromSettings('stripe_secret')??env('STRIPE_SECRET'));
 
         try {

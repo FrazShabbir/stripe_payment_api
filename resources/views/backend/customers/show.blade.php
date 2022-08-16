@@ -98,11 +98,14 @@
                         </div>
                         @endif
                       </div>
+                      @can('Update Customers')
                       @if (!$customer->refund_id)
 
                       <a href="{{route('customers.processRefund',[$customer->id,$customer->transaction_id])}}" onclick="if (confirm('Are you Sure you want to Refund?')){return true;}else{event.stopPropagation(); event.preventDefault();};" class="btn btn-primary mr-3">Process Stripe Refund</a>
                       <a href="{{route('customers.manualRefundProcess',[$customer->id,$customer->transaction_id])}}" onclick="if (confirm('Are you Sure you want to Refund?')){return true;}else{event.stopPropagation(); event.preventDefault();};"  class="btn btn-primary mr-3">Process Manual Refund</a>
                       @endif
+                      @endcan
+  
                       <a href="{{route('customers.index')}}" class="btn iq-bg-danger mr-3">Back</a>
 
                 </div>

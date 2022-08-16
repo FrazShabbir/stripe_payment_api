@@ -7,7 +7,7 @@ return [
             'Update Users',
             'Read Users',
             'Delete Users',
-            'Export Users',
+           
         ],
       
         'Roles' => [
@@ -15,13 +15,22 @@ return [
             'Update Roles',
             'Read Roles',
             'Delete Roles',
-            'Export Roles',
+            
         ],
     
+        'Customer' => [
+            'Update Customers',
+            'Read Customers',
+            
+        ],
+
         'Settings' => [
             'Update Settings',
         ],
      
+        'Payments'=>[
+            'Create Payment'
+        ]
       
 
 
